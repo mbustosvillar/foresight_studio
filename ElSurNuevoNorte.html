@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Sur es el Nuevo Norte | Foresight Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #e5e5e5;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-blur {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        /* ── Marquee ── */
+        .marquee-track {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* ── Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ── Nav scroll ── */
+        nav.scrolled { background: rgba(0,0,0,0.88) !important; }
+        /* ── Card hover ── */
+        .briefing-card { transition: transform 0.3s, background 0.3s, box-shadow 0.3s; }
+        .briefing-card:hover { transform: translateY(-5px); }
+        .briefing-card.dark:hover { background: rgba(255,255,255,0.06) !important; }
+        .briefing-card.white-card:hover { box-shadow: 0 24px 60px rgba(255,255,255,0.14); }
+        /* ── Step hover ── */
+        .step:hover { transform: translateY(-6px); }
+        .step { transition: transform 0.3s; }
+        /* ── Price card ── */
+        .price-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .price-card:hover { transform: translateY(-5px); }
+        .price-card.white-card:hover { box-shadow: 0 24px 60px rgba(255,255,255,0.14); }
+        /* ── Button base ── */
+        .btn-dark { transition: background 0.2s, transform 0.2s; }
+        .btn-dark:hover { background: #e4e4e7 !important; transform: scale(1.04); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.06) !important; }
+        .btn-card:hover { background: #fff !important; color: #000 !important; }
+        .btn-white:hover { background: #27272a !important; }
+        /* ── Unlock overlay ── */
+        #muestra-overlay { transition: opacity 0.5s; }
+        #muestra-overlay.hidden-overlay { opacity: 0; pointer-events: none; }
+        /* ── Hero entrance ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-0 { animation: fadeUp 0.9s ease 80ms  both; }
+        .hero-1 { animation: fadeUp 0.9s ease 230ms both; }
+        .hero-2 { animation: fadeUp 0.9s ease 380ms both; }
+        .hero-3 { animation: fadeUp 0.9s ease 530ms both; }
+        /* ── Active nav link ── */
+        nav a.active, nav button.active { color: #fff !important; }
+        /* ── Blur preview ── */
+        #doc-preview { transition: filter 0.5s; }
+        #doc-preview.unblurred { filter: none !important; }
+    </style>
+</head>
+<body class="antialiased selection:bg-zinc-800 selection:text-white">
+
+<!-- ── Nav ── -->
+<nav id="main-nav" class="fixed w-full z-50 border-b border-white/10 bg-black/50 backdrop-filter backdrop-blur-md" style="transition:background 0.4s">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-white flex items-center justify-center rounded-sm">
+                <div class="w-4 h-4 border-2 border-black rotate-45"></div>
+            </div>
+            <span class="font-bold tracking-tighter text-xl uppercase">Foresight Studio</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-[10px] font-medium tracking-widest uppercase font-mono">
+            <a href="#briefings" class="nav-link hover:text-white transition-colors text-zinc-500" style="transition:color 0.25s">Briefings</a>
+            <a href="#muestra"   class="nav-link hover:text-white transition-colors text-zinc-500" style="transition:color 0.25s">Muestra</a>
+            <a href="#precios"   class="nav-link hover:text-white transition-colors text-zinc-500" style="transition:color 0.25s">Precios</a>
+            <a href="#precios"   class="bg-white text-black px-5 py-2 font-bold btn-dark">Acceso Directo</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section id="hero" class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-20 overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-900/30 rounded-full blur-[120px] -z-10"></div>
+    <div class="max-w-5xl text-center space-y-8">
+        <p class="text-zinc-500 uppercase tracking-[0.3em] text-[10px] font-semibold hero-0">Inteligencia Económica · LatAm</p>
+        <h1 class="text-6xl md:text-[9rem] font-extrabold tracking-tighter leading-[0.85] gradient-text uppercase hero-1">
+            El Sur es el<br>Nuevo Norte.
+        </h1>
+        <p class="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light italic serif hero-2">
+            Hipótesis accionables sobre el reordenamiento global. Sin ruido institucional. Inteligencia económica para inversores soberanos.
+        </p>
+        <div class="pt-10 flex flex-col items-center gap-6 hero-3">
+            <div class="flex flex-col md:flex-row gap-4 justify-center w-full">
+                <a href="#briefings" class="bg-white text-black px-12 py-5 font-bold text-xs uppercase tracking-widest text-center btn-dark">Explorar Briefings</a>
+                <a href="#muestra"  class="border border-white/20 px-12 py-5 font-bold text-xs uppercase tracking-widest text-center btn-ghost">Ver Muestra Gratuita</a>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-widest text-zinc-500">Desde USD 5 · Descarga Inmediata · Sin Suscripción</p>
+        </div>
+    </div>
+    <div class="absolute bottom-12 w-full max-w-7xl px-8 hidden md:flex justify-between items-end font-mono text-[9px] uppercase tracking-[0.3em] text-zinc-600">
+        <div class="flex flex-col gap-1"><span class="opacity-50">frecuencia</span><span class="text-zinc-400">Weekly Briefings</span></div>
+        <div class="flex flex-col gap-1"><span class="opacity-50">ticket promedio</span><span class="text-zinc-400">USD 7.50</span></div>
+        <div class="flex flex-col gap-1 text-right"><span class="opacity-50">formato</span><span class="text-zinc-400">PDF / Mobile First</span></div>
+    </div>
+</section>
+
+<!-- ── Marquee ── -->
+<section class="py-12 border-y border-white/5 bg-white/[0.01] overflow-hidden">
+    <div class="marquee-track flex gap-20 items-center font-mono text-[11px] uppercase tracking-[0.4em] text-zinc-500">
+        <span>Desdolarización Hegemónica</span><span class="text-white/20">•</span>
+        <span>Ciclo Largo de Commodities 2024-2030</span><span class="text-white/20">•</span>
+        <span>Fragmentación Multipolar</span><span class="text-white/20">•</span>
+        <span>Estrés Fiscal del G7</span><span class="text-white/20">•</span>
+        <span>Soberanía Energética LatAm</span><span class="text-white/20">•</span>
+        <span>Desdolarización Hegemónica</span><span class="text-white/20">•</span>
+        <span>Ciclo Largo de Commodities 2024-2030</span><span class="text-white/20">•</span>
+        <span>Fragmentación Multipolar</span><span class="text-white/20">•</span>
+        <span>Estrés Fiscal del G7</span><span class="text-white/20">•</span>
+    </div>
+</section>
+
+<!-- ── Briefings ── -->
+<section id="briefings" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto space-y-16">
+        <div class="reveal">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tighter uppercase mb-4">Briefings</h2>
+            <p class="text-zinc-400 font-light max-w-md">Inteligencia destilada para la toma de decisiones ejecutivas.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+            <!-- Flash -->
+            <div class="briefing-card dark card-blur p-8 flex flex-col">
+                <div class="mb-10 flex justify-between items-start">
+                    <span class="text-[9px] font-bold border border-zinc-700 px-2 py-1 uppercase text-zinc-500 font-mono">Flash</span>
+                    <span class="font-bold text-xl">USD 5</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Evento de Riesgo</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed mb-8 grow">Análisis de impacto inmediato ante eventos disruptivos: elecciones o shocks de oferta. 4-6 pág.</p>
+                <button class="w-full py-3 bg-white/5 border border-white/10 text-[9px] font-bold uppercase tracking-widest btn-card font-mono">Comprar</button>
+            </div>
+            <!-- Macro -->
+            <div class="briefing-card dark card-blur p-8 flex flex-col">
+                <div class="mb-10 flex justify-between items-start">
+                    <span class="text-[9px] font-bold border border-zinc-700 px-2 py-1 uppercase text-zinc-500 font-mono">Macro</span>
+                    <span class="font-bold text-xl">USD 7</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Briefing LatAm</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed mb-8 grow">Los 5 indicadores críticos que mueven el capital regional cada semana. 8-10 pág.</p>
+                <button class="w-full py-3 bg-white/5 border border-white/10 text-[9px] font-bold uppercase tracking-widest btn-card font-mono">Comprar</button>
+            </div>
+            <!-- Uranium -->
+            <div class="briefing-card white-card p-8 flex flex-col bg-white text-black relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-black text-white text-[7px] font-bold px-6 py-1 rotate-45 translate-x-4 translate-y-2 font-mono">HOT</div>
+                <div class="mb-10 flex justify-between items-start">
+                    <span class="text-[9px] font-bold bg-black/10 px-2 py-1 uppercase font-mono">Tesis Vol.01</span>
+                    <span class="font-bold text-xl">USD 10</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 italic serif">Uranium Thesis</h3>
+                <p class="text-zinc-700 text-sm font-light leading-relaxed mb-8 grow">Del supply-crunch a la soberanía energética. Mapa profundo para los próximos 20 años. 18 pág.</p>
+                <button class="w-full py-3 bg-black text-white text-[9px] font-bold uppercase tracking-widest btn-white font-mono">Descargar Tesis</button>
+            </div>
+            <!-- Pack -->
+            <div class="briefing-card dark card-blur p-8 flex flex-col">
+                <div class="mb-10 flex justify-between items-start">
+                    <span class="text-[9px] font-bold border border-zinc-700 px-2 py-1 uppercase text-zinc-500 font-mono">Pack</span>
+                    <span class="font-bold text-xl">USD 25</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Trimestral</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed mb-8 grow">Todo incluido: briefings semanales, tesis mensuales y alertas de riesgo prioritarias del trimestre.</p>
+                <button class="w-full py-3 bg-white/5 border border-white/10 text-[9px] font-bold uppercase tracking-widest btn-card font-mono">Suscribirse</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Cómo funciona ── -->
+<section class="py-32 px-6 bg-white/[0.02]">
+    <div class="max-w-4xl mx-auto text-center space-y-24">
+        <h2 class="text-4xl md:text-5xl font-bold reveal italic serif leading-tight">Tres minutos entre la duda y la claridad financiera.</h2>
+        <div class="grid md:grid-cols-3 gap-16 font-mono reveal">
+            <div class="step space-y-6 cursor-default">
+                <span class="text-6xl text-white/10 font-black block">01</span>
+                <h4 class="uppercase tracking-[0.3em] text-[10px] font-bold">Elegís</h4>
+                <p class="text-zinc-500 text-[10px] leading-relaxed uppercase">Seleccionás el informe que impacta en tu portfolio actual.</p>
+            </div>
+            <div class="step space-y-6 cursor-default">
+                <span class="text-6xl text-white/10 font-black block">02</span>
+                <h4 class="uppercase tracking-[0.3em] text-[10px] font-bold">Pagás</h4>
+                <p class="text-zinc-500 text-[10px] leading-relaxed uppercase">Vía Gumroad. Sin cuentas obligatorias. USD o Crypto.</p>
+            </div>
+            <div class="step space-y-6 cursor-default">
+                <span class="text-6xl text-white/10 font-black block">03</span>
+                <h4 class="uppercase tracking-[0.3em] text-[10px] font-bold">Recibís</h4>
+                <p class="text-zinc-500 text-[10px] leading-relaxed uppercase">Descarga inmediata del PDF optimizado para móvil.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Muestra ── -->
+<section id="muestra" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-24 items-center">
+        <div class="space-y-10 reveal">
+            <h2 class="text-5xl md:text-7xl font-extrabold leading-[0.9] tracking-tighter uppercase">Lea el<br>interior.</h2>
+            <p class="text-zinc-400 text-xl font-light leading-relaxed italic serif">
+                Nuestros briefings no son newsletters. Son herramientas de decisión con tesis estructuradas y niveles de convicción.
+            </p>
+            <div class="space-y-5 font-mono text-[10px] uppercase tracking-[0.3em]">
+                <div class="flex gap-4 items-center">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>Matrices de Correlación Sur-Norte</span>
+                </div>
+                <div class="flex gap-4 items-center">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    <span>Análisis de Escenarios de Riesgo</span>
+                </div>
+            </div>
+        </div>
+        <div class="relative reveal">
+            <!-- Doc preview -->
+            <div id="doc-preview" class="bg-zinc-200 p-12 text-black space-y-8 select-none pointer-events-none" style="filter:blur(3px);transition:filter 0.5s">
+                <div class="flex justify-between border-b border-black/10 pb-5 font-mono text-[9px] uppercase font-bold tracking-widest">
+                    <span>Confidential Intelligence</span><span>P. 04 / Thesis Vol.01</span>
+                </div>
+                <h3 class="text-4xl font-bold leading-[1.1]">Macro Reversal: The Uranium supply crunch.</h3>
+                <p class="text-sm font-medium leading-relaxed italic serif">El déficit estructural de uranio enriquecido no es solo un fenómeno de mercado, es una debilidad crítica para el G7...</p>
+                <div class="py-12 px-6 bg-black/5 rounded flex flex-col items-center justify-center space-y-4">
+                    <div class="w-full h-1 bg-black/20 rounded-full relative overflow-hidden">
+                        <div class="absolute inset-0 bg-black/50 w-2/3"></div>
+                    </div>
+                    <span class="italic text-[10px] opacity-40 uppercase font-mono">Chart 1.4: Supply/Demand Gap</span>
+                </div>
+                <p class="text-sm leading-relaxed">Las economías del Sur Global (Brasil, Argentina) poseen el apalancamiento asimétrico para renegociar...</p>
+            </div>
+            <!-- Overlay -->
+            <div id="muestra-overlay" class="absolute inset-0 flex flex-col items-center justify-center p-12 text-center space-y-8" style="background:rgba(5,5,5,0.55);backdrop-filter:blur(2px)">
+                <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center border border-white/20 shadow-2xl">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="space-y-2">
+                    <h4 class="text-3xl font-bold">Análisis Completo Bloqueado</h4>
+                    <p class="text-zinc-400 font-mono text-[10px] uppercase tracking-widest">18 Páginas · Hipótesis de Inversión</p>
+                </div>
+                <button id="unlock-btn" class="bg-white text-black px-10 py-4 text-[10px] font-bold uppercase tracking-widest shadow-xl btn-dark font-mono">
+                    Desbloquear por USD 10
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Precios ── -->
+<section id="precios" class="py-32 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto space-y-24">
+        <div class="text-center space-y-4 reveal">
+            <h2 class="text-5xl font-extrabold uppercase tracking-tight">Acceso Directo</h2>
+            <p class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">Sin contratos · Sin permanencia obligatoria</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 reveal">
+            <!-- Individual -->
+            <div class="price-card card-blur p-12 space-y-10 flex flex-col">
+                <h5 class="font-mono text-[10px] uppercase tracking-[0.4em] text-zinc-500">Individual</h5>
+                <div><span class="text-5xl font-extrabold tracking-tighter">A la carta</span></div>
+                <ul class="space-y-5 font-mono text-[9px] uppercase text-zinc-400 flex-grow">
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Sin suscripción</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Pago único por informe</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Acceso permanente</li>
+                </ul>
+                <a href="#briefings" class="block text-center border border-white/20 py-5 text-[10px] font-bold uppercase tracking-widest btn-ghost font-mono">Elegir Informe</a>
+            </div>
+            <!-- Quarterly -->
+            <div class="price-card white-card bg-white text-black p-12 space-y-10 relative flex flex-col">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-1.5 text-[8px] font-bold uppercase tracking-[0.3em] font-mono whitespace-nowrap">RECOMENDADO</div>
+                <h5 class="font-mono text-[10px] uppercase tracking-[0.4em] text-zinc-400">Quarterly</h5>
+                <div>
+                    <span class="text-7xl font-extrabold tracking-tighter">USD 25</span>
+                    <span class="block text-[10px] text-zinc-500 italic lowercase font-mono mt-2">facturado cada 3 meses</span>
+                </div>
+                <ul class="space-y-5 font-mono text-[9px] uppercase font-bold flex-grow">
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Briefings semanales</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Tesis mensuales</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Cancelable en un click</li>
+                </ul>
+                <button class="w-full bg-black text-white py-5 text-[10px] font-bold uppercase tracking-widest btn-white font-mono">Suscribirse</button>
+            </div>
+            <!-- Institutional -->
+            <div class="price-card card-blur p-12 space-y-10 flex flex-col">
+                <h5 class="font-mono text-[10px] uppercase tracking-[0.4em] text-zinc-500">Institutional</h5>
+                <div>
+                    <span class="text-7xl font-extrabold tracking-tighter">USD 79</span>
+                    <span class="block text-[10px] text-zinc-500 italic lowercase font-mono mt-2">pase anual / full access</span>
+                </div>
+                <ul class="space-y-5 font-mono text-[9px] uppercase text-zinc-400 flex-grow">
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Archivo histórico completo</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Todos los informes nuevos</li>
+                    <li class="flex gap-3 items-center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Invitación a Q&A privado</li>
+                </ul>
+                <button class="w-full border border-white/20 py-5 text-[10px] font-bold uppercase tracking-widest btn-ghost font-mono">Comprar Pase</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
+        <div class="space-y-6 text-center md:text-left">
+            <div class="text-white/10 text-6xl font-black select-none">SUR</div>
+            <p class="font-mono text-[9px] uppercase tracking-[0.4em] text-zinc-500 max-w-xs leading-loose">
+                Inteligencia soberana para la nueva era geoeconómica. Escrito desde el Sur Global.
+            </p>
+        </div>
+        <div class="flex gap-16 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+            <a href="#" class="hover:text-white transition-colors">Instagram</a>
+            <a href="#" class="hover:text-white transition-colors">Twitter</a>
+            <a href="#" class="hover:text-white transition-colors">Gumroad</a>
+        </div>
+    </div>
+    <div class="mt-24 text-center font-mono text-[8px] uppercase tracking-[0.5em] text-zinc-700">
+        © 2024 El Sur es el Nuevo Norte // Foresight Studio
+    </div>
+</footer>
+
+<script>
+// ── Smooth scroll ──────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// ── Nav: scrolled state ────────────────────────────────────────────────────
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── Nav: active section ────────────────────────────────────────────────────
+const sections = ['hero','briefings','muestra','precios'];
+const navLinks = document.querySelectorAll('.nav-link');
+const sectionEls = sections.map(id => document.getElementById(id));
+
+const activeObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            const id = entry.target.id;
+            const active = document.querySelector(`.nav-link[href="#${id}"]`);
+            if (active) active.classList.add('active');
+        }
+    });
+}, { threshold: 0.4 });
+
+sectionEls.forEach(el => el && activeObs.observe(el));
+
+// ── Reveal on scroll ───────────────────────────────────────────────────────
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('active');
+            revealObs.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Muestra: unlock toggle ─────────────────────────────────────────────────
+const unlockBtn = document.getElementById('unlock-btn');
+const overlay   = document.getElementById('muestra-overlay');
+const preview   = document.getElementById('doc-preview');
+
+unlockBtn.addEventListener('click', () => {
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    preview.style.filter = 'none';
+    preview.style.pointerEvents = 'auto';
+    preview.style.userSelect = 'text';
+});
+</script>
+</body>
+</html>
